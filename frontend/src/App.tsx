@@ -1,22 +1,33 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import type { TaskGroup } from "./model/TaskGroup";
-import { getTaskGroups } from "./AppService";
-import GroupsList from "./components/GroupsList";
+import type { Task } from "./model/Task";
+import { getAllTasks } from "./AppService";
+import GroupsList from "./components/TasksList";
+import CreateTaskDialog from "./components/CreateTaskDialog";
 
 function App() {
-  const [taskGroupsList, setTaskGroups] = useState<TaskGroup[]>([]);
+  const [tasksList, setTasksList] = useState<Task[]>([]);
+
+  const refreshTasks = async () => {
+    const tasks = await getAllTasks();
+    setTasksList(tasks);
+  };
 
   useEffect(() => {
-    getTaskGroups().then((taskGroups) => setTaskGroups(taskGroups));
-  });
+    refreshTasks();
+  }, []);
 
   return (
     <div className="flex flex-col p-20 items-center">
       <div className="text-8xl font-extrabold mb-40 font-mono text-emerald-900">
-        Task Groups:
+        Tasks:
       </div>
-      {taskGroupsList.length != 0 && <GroupsList groupsList={taskGroupsList} />}
+
+      <CreateTaskDialog onTaskCreated={refreshTasks}></CreateTaskDialog>
+
+      {tasksList.length != 0 && (
+        <GroupsList tasksList={tasksList} onTaskDeleted={refreshTasks} />
+      )}
     </div>
   );
 }

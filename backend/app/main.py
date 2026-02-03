@@ -1,7 +1,10 @@
 from fastapi import FastAPI
-from app.routes import task_group
+from app.routes import tasks
 from fastapi.middleware.cors import CORSMiddleware
+from app.models import task_model
+from app.database import engine
 
+task_model.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 origins = ["http://localhost:5173", "localhost:5173"]
@@ -14,7 +17,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(task_group.router)
+app.include_router(tasks.router)
 
 
 @app.get("/health")

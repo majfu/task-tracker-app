@@ -1,4 +1,5 @@
-firebase_admin
+sqlalchemy
+psycopg2-binary
 pydantic
 uvicorn
 fastapi
