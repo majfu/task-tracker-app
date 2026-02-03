@@ -2,10 +2,10 @@ from fastapi import APIRouter
 from app.firebase import db
 from datetime import datetime
 
-router = APIRouter(prefix="/task-group")
+router = APIRouter(prefix="/api/task-group")
 
 
-@router.get("/")
+@router.get("/all")
 def get_all_task_groups():
     docs = (
         db.collection("TaskGroup")
