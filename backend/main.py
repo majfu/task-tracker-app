@@ -4,10 +4,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.models import task_model
 from app.database import engine
 
-task_model.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
-origins = ["http://localhost:5173", "localhost:5173"]
+
+@app.on_event("startup")
+def on_startup():
+    task_model.Base.metadata.create_all(bind=engine)
+
+
+origins = ["http://localhost:5173", "http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
