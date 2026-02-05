@@ -35,6 +35,7 @@ export const deleteTask = async (id: string): Promise<boolean> => {
     const response = await axios.delete(`${TASKS_API_URL}/${id}`);
     return response.status === 200 || response.status === 201;
   } catch (error) {
+    console.log(error);
     return false;
   }
 };
