@@ -1,8 +1,6 @@
-name: CI - Formatting frontend and backend code
+name: Formatting frontend and backend code on pull request
 
-on:
-  push:
-  pull_request:
+on: [pull_request]
 
 jobs:
   backend:
