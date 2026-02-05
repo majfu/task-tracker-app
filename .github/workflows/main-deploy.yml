@@ -1,0 +1,24 @@
+name: Deploy on pushes to main
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-backend:
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      image_name: "task-tracker-backend"
+      context_dir: "./backend"
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+
+  build-frontend:
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      image_name: "task-tracker-frontend"
+      context_dir: "./frontend"
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
