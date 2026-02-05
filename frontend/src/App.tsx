@@ -14,7 +14,10 @@ function App() {
   };
 
   useEffect(() => {
-    refreshTasks();
+    const loadTasksList = async () => {
+      await refreshTasks();
+    };
+    loadTasksList();
   }, []);
 
   return (
