@@ -22,6 +22,7 @@ jobs:
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
 
   deploy:
     needs: [build-backend, build-frontend]
