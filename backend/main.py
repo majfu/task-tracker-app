@@ -3,6 +3,9 @@ from app.routes import tasks
 from fastapi.middleware.cors import CORSMiddleware
 from app.models import task_model
 from app.database import engine
+import os
+
+FRONTEND_URL = os.getenv("FRONTEND_URL")
 
 app = FastAPI()
 
@@ -13,6 +16,9 @@ def on_startup():
 
 
 origins = ["http://localhost:5173", "http://localhost:3000"]
+
+if FRONTEND_URL is not None:
+    origins.append(FRONTEND_URL)
 
 app.add_middleware(
     CORSMiddleware,
