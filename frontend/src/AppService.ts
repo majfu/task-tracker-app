@@ -2,7 +2,9 @@ import axios from "axios";
 import type { Task } from "./model/Task";
 import type { CreateTask } from "./model/CreateTask";
 
-const TASKS_API_URL = "http://localhost:8000/api/tasks";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+const TASKS_API_URL =
+  `${BACKEND_URL}/api/tasks` || "http://localhost:8000/api/tasks";
 
 export const getAllTasks = async (): Promise<Task[]> => {
   try {
