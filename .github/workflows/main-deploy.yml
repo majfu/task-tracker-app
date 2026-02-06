@@ -23,12 +23,12 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
-deploy:
-  needs: [build-backend, build-frontend]
-  runs-on: ubuntu-latest
-  steps:
-    - name: Deploy Backend to Render
-      run: curl -f ${{ secrets.RENDER_BACKEND_HOOK }}
+  deploy:
+    needs: [build-backend, build-frontend]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Backend to Render
+        run: curl -f ${{ secrets.RENDER_BACKEND_HOOK }}
 
-    - name: Deploy Frontend to Render
-      run: curl -f ${{ secrets.RENDER_FRONTEND_HOOK }}
+      - name: Deploy Frontend to Render
+        run: curl -f ${{ secrets.RENDER_FRONTEND_HOOK }}
